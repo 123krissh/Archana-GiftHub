@@ -21,7 +21,7 @@ const Navbar = () => {
     };
   return (
     <>
-    <nav className="container mx-auto flex items-center justify-between py-4 px-2 h-20">
+    <nav className= "container mx-auto flex items-center justify-between py-4 px-2 h-20">
         {/*Left logo*/}
         <div>
             <Link to="/" className="">

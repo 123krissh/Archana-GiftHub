@@ -40,19 +40,13 @@ const similarProducts = [
         _id: 3,
         name: "Product 3",
         price: 99,
-        images: [{url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg"}],
+        images: [{url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp"}],
     },
     {
         _id: 4,
         name: "Product 4",
         price: 249,
-        images: [{url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg"}],
-    },
-    {
-        _id: 5,
-        name: "Product 5",
-        price: 449,
-        images: [{url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg"}],
+        images: [{url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp"}],
     },
 ]
 
@@ -105,7 +99,7 @@ const ProductDetails = () => {
             {/* Main Image */}
             <div className="md:w-1/2">
             <div className="mb=4">
-                <img src={mainImage} alt="Main Product" className="w-full h-auto object-cover rounded-lg"/>
+                <img src={mainImage} alt="Main Product" className="w-full h-auto md:h-[30rem] object-cover rounded-lg"/>
             </div>
             </div>
             {/* Mobile Thumbnail */}
@@ -161,7 +155,7 @@ const ProductDetails = () => {
             </div>
             </div>
         </div>
-        <div className="mt-10">
+        <div className="mt-8">
             <h2 className="text-xl text-center font-medium mb-4">You May Also Like</h2>
             <ProductGrid products={similarProducts}/>
         </div>

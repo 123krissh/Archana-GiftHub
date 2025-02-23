@@ -45,10 +45,12 @@ const CartContent = () => {
                         <button className="border rounded px-2 py-1 font-medium">+</button>
                     </div>
                 </div>
-                <p className="ml-20">Rs.{product.price.toLocaleString()}</p>
+                <div className="px-4">
+                <p >₹.{product.price.toLocaleString()}</p>
                 <button>
-                    <MdDeleteForever  className="h-6 w-6 text-red-500"/>
+                    <MdDeleteForever className="h-6 w-6 text-red-500"/>
                 </button>
+                </div>
             </div>
         </div>
       ))}

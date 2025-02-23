@@ -4,24 +4,27 @@ import CollectionSection from '../components/Products/CollectionSection'
 import ProductDetails from '../components/Products/ProductDetails'
 import Card from '../components/Layout/Card'
 import About from '../components/Layout/About'
+import FeaturesSection from '../components/Products/FeaturesSection'
+import NewArrivals from '../components/Products/NewArrivals'
 
 const Home = () => {
   return (
     <div>
       <Hero/>
-      <div className="mt-10">
-        <h1 className="text-3xl ml-8 font-bold">Our Collections</h1>
+
       <CollectionSection/>
-      </div>
+
       <Card/>
-      <div className="mt-5">
-        <h1 className="text-3xl ml-8 font-bold mb-4">Our New Arivals</h1>
+
+      <NewArrivals/>
+
+      <div>
       <ProductDetails/>
       </div>
-      
-      
-    
+
       <About/>
+      
+      <FeaturesSection/>
     </div>
   )
 }

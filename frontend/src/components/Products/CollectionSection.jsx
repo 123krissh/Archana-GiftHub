@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom'
 const CollectionSection = () => {
   return (
     <section className="py-4 px-4">
+        <div className="mt-10 mb-2">
+            <h1 className="text-3xl ml-8 text-center font-bold">Our Collections</h1>
+        </div>
         <div className="container mx-auto flex flex-col lg:flex-row gap-8 py-6">
             {/* Custom collage */}
             <div className="relative flex-1 ">
