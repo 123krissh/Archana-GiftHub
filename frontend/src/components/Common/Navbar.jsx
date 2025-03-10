@@ -20,8 +20,8 @@ const Navbar = () => {
         setDraweropen(!drawerOpen);
     };
   return (
-    <>
-    <nav className= "container mx-auto flex items-center justify-between py-4 px-2 h-20">
+    <div>
+    <nav className= "container bg-white mx-auto flex items-center justify-between py-4 px-2 h-20">
         {/*Left logo*/}
         <div>
             <Link to="/" className="">
@@ -30,17 +30,16 @@ const Navbar = () => {
         </div>
         {/*Center navigaton link */}
         <div className="hidden md:flex space-x-6">
-            <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Home</Link>
+            <Link to="/" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Home</Link>
             <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">About Us</Link>
-            <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Products</Link>
+            <Link to="/collections/all" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Products</Link>
             <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Contact Us</Link>
-            
-
         </div>
         {/*Right icons*/}
         <div className="flex items-center space-x-4 px-10">
             <Link to="/profile" className="hover:text-black flex items-center gap-1"> 
-            <HiOutlineUser className="h-6 w-6 text-gray-700"/> <span className="hidden md:flex">Sign in</span>
+            <HiOutlineUser className="h-6 w-6 text-gray-700"/> 
+            {/* <span className="hidden md:flex">Sign in</span> */}
             </Link>
             <Link to="#" className=" hover:text-black flex items-center gap-3">
             <button onClick={toggleCartDrawer} className="relative hover:text-black">
@@ -48,7 +47,8 @@ const Navbar = () => {
                 <span className="absolute -top-1 bg-red-700 text-white text-xs rounded-full px-2 py-0.5">
                   4
                 </span>
-            </button><span className="hidden md:flex">Cart</span> 
+            </button>
+            {/* <span className="hidden md:flex">Cart</span>  */}
             </Link>
             <div className="overflow-hidden">
             <SearchBar/>
@@ -70,14 +70,14 @@ const Navbar = () => {
     <div className="p-4">
         <h2 className="text-xl font-semibold mb-4">Menu</h2>
         <nav className="space-y-4">
-            <Link to="#" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">HOME</Link>
+            <Link to="/" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">HOME</Link>
             <Link to="#" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">ABOUT US</Link>
-            <Link to="#" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">PRODUCTS</Link>
+            <Link to="/collections/all" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">PRODUCTS</Link>
             <Link to="#" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">CONTACT US</Link>
         </nav>
     </div>
     </div>
-    </>
+    </div>
   )
 }
 

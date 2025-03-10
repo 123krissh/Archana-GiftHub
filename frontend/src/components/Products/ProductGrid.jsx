@@ -7,7 +7,7 @@ const ProductGrid = ({ products }) => {
        {products.map((product, index) => (
         <Link key={index} to={`/product/${product._id}`} className="block">
             <div className="bg-white p-2 rounded">
-                <div className="w-full h-70 mb-3">
+                <div className="w-full h-full mb-3">
                     <img src={product.images[0].url} 
                     alt={product.images[0].altText || product.name}
                     className="w-full h-full object-cover rounded-lg" 

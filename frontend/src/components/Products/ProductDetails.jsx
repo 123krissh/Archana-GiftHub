@@ -13,11 +13,11 @@ const selectedProduct = {
     images: [
         {
             url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg",
-            altText: "Product",
+            altText: "Product 1",
         },
         {
             url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-            altText: "Product",
+            altText: "Product 2",
         },
     ],
 };
@@ -88,12 +88,14 @@ const ProductDetails = () => {
 
   return (
     <div className="p-6">
-      <div className="max-w-5xl mx-auto bg-gray-100 p-8 rounded-lg">
+      <div className="max-w-6xl mx-auto bg-gray-100 p-8 rounded-lg">
         <div className="flex flex-col md:flex-row">
             {/* Left Thumbnails */}
             <div className="hidden md:flex flex-col space-y-4 mr-6">
                 {selectedProduct.images.map((image, index) => (
-                    <img key={index} src={image.url} alt={image.altText || `Thumbnail ${index}`} className= {`w-20 h-20 object-cover rounded-lg cursor-pointer border ${mainImage === image.url ? "border-black" : "border-gray-300"}`} onClick={() => setMainImage(image.url)} />
+                    <img key={index} src={image.url} alt={image.altText || `Thumbnail ${index}`} 
+                    className= {`w-20 h-20 object-cover rounded-lg cursor-pointer border ${mainImage === image.url ? "border-black" : "border-gray-300"}`} 
+                    onClick={() => setMainImage(image.url)} />
                 ))}
             </div>
             {/* Main Image */}
