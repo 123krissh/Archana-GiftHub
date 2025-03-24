@@ -31,12 +31,13 @@ const Navbar = () => {
         {/*Center navigaton link */}
         <div className="hidden md:flex space-x-6">
             <Link to="/" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Home</Link>
-            <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">About Us</Link>
+            <Link to="/about" className="text-gray-700 hover:text-black text-sm font-medium uppercase">About Us</Link>
             <Link to="/collections/all" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Products</Link>
             <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Contact Us</Link>
         </div>
         {/*Right icons*/}
         <div className="flex items-center space-x-4 px-10">
+            <Link to="/admin" className="block bg-black px-1 rounded text-sm text-white ">Admin</Link>
             <Link to="/profile" className="hover:text-black flex items-center gap-1"> 
             <HiOutlineUser className="h-6 w-6 text-gray-700"/> 
             {/* <span className="hidden md:flex">Sign in</span> */}
@@ -71,7 +72,7 @@ const Navbar = () => {
         <h2 className="text-xl font-semibold mb-4">Menu</h2>
         <nav className="space-y-4">
             <Link to="/" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">HOME</Link>
-            <Link to="#" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">ABOUT US</Link>
+            <Link to="/about" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">ABOUT US</Link>
             <Link to="/collections/all" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">PRODUCTS</Link>
             <Link to="#" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">CONTACT US</Link>
         </nav>

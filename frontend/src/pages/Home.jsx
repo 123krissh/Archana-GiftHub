@@ -77,8 +77,6 @@ const Home = () => {
       </div>
 
       <About/>
-       
-      <FeaturesSection/>
     </div>
   )
 }

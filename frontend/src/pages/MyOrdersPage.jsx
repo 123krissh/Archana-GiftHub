@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const MyOrersPage = () => {
+const MyOrdersPage = () => {
     const [orders, setOrders] = useState([]);
     const navigate = useNavigate();
 
@@ -98,4 +98,4 @@ const MyOrersPage = () => {
   )
 }
 
-export default MyOrersPage
+export default MyOrdersPage

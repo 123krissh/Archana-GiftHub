@@ -1,5 +1,5 @@
 import React from 'react'
-import MyOrersPage from './MyOrersPage'
+import MyOrdersPage from './MyOrdersPage'
 
 const Profile = () => {
   return (
@@ -14,7 +14,7 @@ const Profile = () => {
             </div>
             {/* Right Section */}
             <div className="w-full md:w-2/3 lg:w-3/4">
-            <MyOrersPage/>
+            <MyOrdersPage/>
             </div>
         </div>
       </div>

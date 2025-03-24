@@ -1,7 +1,9 @@
 import React from 'react'
+import FeaturesSection from '../Products/FeaturesSection'
 
 const About = () => {
   return (
+    <>
     <div className="bg-gray-100 py-12 px-6 md:px-16">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         {/* Left Section */}
@@ -46,6 +48,11 @@ const About = () => {
         </div>
       </div>
     </div>
+
+    <div>
+      <FeaturesSection/>
+    </div>
+    </>
   )
 }
 

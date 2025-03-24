@@ -22,16 +22,16 @@ const Footer = () => {
         <h3 className="text-lg text-gray-200 mb-4">Shop</h3>
         <ul className="space-y-2 text-gray-400">
             <li>
-                <Link to="#" className="hover:text-gray-500 transition-colors">Persnalised Photo Frames </Link>
+                <Link to="/collections/all?product=persnalised-photo-frames" className="hover:text-gray-500 transition-colors">Persnalised Photo Frames </Link>
             </li>
             <li>
-                <Link to="#" className="hover:text-gray-500 transition-colors">Pillow Printing </Link>
+                <Link to="/collections/all?product=pillow-printing" className="hover:text-gray-500 transition-colors">Pillow Printing </Link>
             </li>
             <li>
-                <Link to="#" className="hover:text-gray-500 transition-colors">Cup Printing </Link>
+                <Link to="/collections/all?product=cup-printing" className="hover:text-gray-500 transition-colors">Cup Printing </Link>
             </li>
             <li>
-                <Link to="#" className="hover:text-gray-500 transition-colors">Customized Gift Items</Link>
+                <Link to="/collections/all?product=customized-gift-items" className="hover:text-gray-500 transition-colors">Customized Gift Items</Link>
             </li>
         </ul>
     </div>

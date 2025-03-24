@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const OrderDetailsPage = () => {
     const { id } = useParams();
@@ -107,9 +107,9 @@ const OrderDetailsPage = () => {
                                     {item.name}
                                     </Link>
                                 </td>
-                                <td className="py-2 px-4">${item.price}</td>
-                                <td className="py-2 px-4">${item.quantity}</td>
-                                <td className="py-2 px-4">${item.price * item.quantity}</td>
+                                <td className="py-2 px-9">₹{item.price}</td>
+                                <td className="py-2 px-9">{item.quantity}</td>
+                                <td className="py-2 px-2">₹{item.price * item.quantity}</td>
                             </tr>
                         ))}
                     </tbody>
