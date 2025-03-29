@@ -154,6 +154,37 @@ router.get("/", async (req, res) => {
     }
 });
 
+// @route GET /api/products/best-product
+// @desc Retrieve the product with heghest rating
+// @access public
+router.get("/best-product", async (req, res) =>{
+    try {
+        const bestProduct = await Product.find().sort({rating: -1});
+        if(bestProduct) {
+            res.json(bestProduct);
+        } else {
+            res.status(404).json({message: "No best product found"});
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server Error");
+    }
+});
+
+// @route GET /api/products/new-arrivals
+// @desc Retrieve latest 8 products - Creation date
+// @access public
+router.get("/new-arrivals", async (req, res) => {
+    try {
+        // Fetch latest 8 products
+        const newArrivals = await Product.find().sort({createdAt: -1}).limit(8); 
+        res.json(newArrivals);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server Error");
+    }
+});
+
 // @route GET /api/products/:id
 // @desc get a single product by ID
 // @access public
@@ -176,7 +207,25 @@ router.get("/:id", async (req, res) => {
 // @access public
 router.get("/similar/:id", async (req, res) => {
     const {id} = req.params;
-    console.log(id); 
+
+    try {
+        const product = await Product.findById(id);
+
+        if(!product) {
+            return res.status(404).json({message: "Product not found"});
+        }
+
+        const similarProducts = await Product.find({
+            // Exclude the current product id
+            _id: {$ne: id}, 
+            category: product.category,
+        }).limit(4);
+
+        res.json(similarProducts);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server Error"); 
+    }
 });
 
 module.exports = router;
