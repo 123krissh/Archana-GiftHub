@@ -11,7 +11,6 @@ const orderItemSchema = new mongoose.Schema(
     image: { type: String, required: true },
     price: { type: Number, required: true },
     size: String,
-    color: String,
     quantity: {
       type: Number,
       required: true,
@@ -31,15 +30,14 @@ const orderSchema = new mongoose.Schema(
     ShippingAddress: {
       address: { type: String, required: true },
       city: { type: String, required: true },
-      postalCode: { type: String, required: true },
+      pinCode: { type: String, required: true },
+      state: {type: String, required: true},
       country: { type: String, required: true },
     },
-
     paymentMethod: {
       type: String,
       required: true,
     },
-
     totalPrice: {
       type: Number,
       required: true,
@@ -69,7 +67,7 @@ const orderSchema = new mongoose.Schema(
       default: "Processing",
     },
   },
-  { timeseries: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("order", orderSchema);
