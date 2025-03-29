@@ -1,1 +1,1 @@
-<h1>E-Commerce Website MERN Project</h1>
+<h1>E-Commerce Website MERN Stack Project</h1>
