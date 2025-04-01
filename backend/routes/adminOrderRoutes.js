@@ -62,4 +62,9 @@ router.delete("/:id", protect, admin, async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+<<<<<<< HEAD
 module.exports = router;
+=======
+
+module.exports = router;
+>>>>>>> main

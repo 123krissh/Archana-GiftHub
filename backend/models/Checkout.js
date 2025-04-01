@@ -12,19 +12,31 @@ const checkoutItemSchema = new mongoose.Schema(
       required: true,
     },
     image: {
+<<<<<<< HEAD
       type: String,
       required: true,
+=======
+        type: String,
+        required: true,
+>>>>>>> main
     },
     price: {
       type: Number,
       required: true,
     },
     quantity: {
+<<<<<<< HEAD
       type: Number,
       required: true,
     },
   },
   { _id: false }
+=======
+        type: Number,
+        required: true,
+    }
+}, {_id: false}
+>>>>>>> main
 );
 
 const checkoutSchema = new mongoose.Schema(
@@ -34,7 +46,7 @@ const checkoutSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    checkoutItem: [checkoutItemSchema],
+    checkoutItems: [checkoutItemSchema],
     shippingAddress: {
       address: { type: String, required: true },
       city: { type: String, required: true },
