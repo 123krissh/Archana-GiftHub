@@ -84,14 +84,14 @@ router.post("/:id/finalize", protect, async (req, res) => {
             // Create final order based on the checkout details
             const finalOrder = await Order.create({
                 user: checkout.user,
-                orderItems: checkout.orderItems,
+                orderItems: checkout.checkoutItems,
                 shippingAddress: checkout.shippingAddress,
                 paymentMethod: checkout.paymentMethod,
                 totalPrice: checkout.totalPrice,
                 isPaid: true,
                 paidAt: checkout.paidAt,
                 isDelivered: false,
-                paymentSatus: "paid",
+                paymentStatus: "paid",
                 paymentDetails: checkout.paymentDetails,
             });
 
@@ -109,7 +109,7 @@ router.post("/:id/finalize", protect, async (req, res) => {
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({message: "Server Error"});
+        res.status(500).json({message: "Server Error", error: error.message});
     }
 });
 
