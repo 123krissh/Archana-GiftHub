@@ -1,7 +1,7 @@
 const express = require("express");
 const Product = require("../models/Product");
-
 const { protect, admin } = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
 //@route GET /api/admin/products

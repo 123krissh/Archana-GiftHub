@@ -79,17 +79,20 @@ router.post("/:id/finalize", protect, async (req, res) => {
 
         if(checkout.isPaid && !checkout.isFinalized) {
             // Create final order based on the checkout details
+
+            // console.log(checkout.shippingAddress);
+            
             const finalOrder = await Order.create({
-                user: checkout.user,
-                orderItems: checkout.checkoutItems,
-                shippingAddress: checkout.shippingAddress,
-                paymentMethod: checkout.paymentMethod,
-                totalPrice: checkout.totalPrice,
-                isPaid: true,
-                paidAt: checkout.paidAt,
-                isDelivered: false,
-                paymentStatus: "paid",
-                paymentDetails: checkout.paymentDetails,
+                user:checkout.user,
+                orderItems:checkout.checkoutItems,
+                shippingAddress:checkout.shippingAddress,
+                paymentMethod:checkout.paymentMethod,
+                totalPrice:checkout.totalPrice,
+                isPaid:true,
+                paidAt:checkout.paidAt,
+                isDelivered:false,
+                paymentStatus:"paid",
+                paymentDetails:checkout.paymentDetails,
             });
 
             // Mark the checkout as finalized
