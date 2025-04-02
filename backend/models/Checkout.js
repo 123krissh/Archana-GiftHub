@@ -12,31 +12,18 @@ const checkoutItemSchema = new mongoose.Schema(
       required: true,
     },
     image: {
-<<<<<<< HEAD
-      type: String,
-      required: true,
-=======
         type: String,
         required: true,
->>>>>>> main
     },
     price: {
       type: Number,
       required: true,
     },
     quantity: {
-<<<<<<< HEAD
-      type: Number,
-      required: true,
-    },
-  },
-  { _id: false }
-=======
         type: Number,
         required: true,
     }
 }, {_id: false}
->>>>>>> main
 );
 
 const checkoutSchema = new mongoose.Schema(

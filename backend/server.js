@@ -6,13 +6,10 @@ const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const checkoutRoutes = require("./routes/checkoutRoutes");
-<<<<<<< HEAD
-=======
 const orderRoutes = require("./routes/orderRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
 const subscribeRoute = require("./routes/subscribeRoute");
 const adminRoutes = require("./routes/adminRoutes");
->>>>>>> main
 const productAdminRoutes = require("./routes/productAdminRoutes");
 const adminOrderRoutes = require("./routes/adminOrderRoutes");
 
@@ -36,18 +33,12 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/checkout", checkoutRoutes);
-<<<<<<< HEAD
-
-//
-//app.use("/api/admin/users",adminRoutes);
-=======
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api", subscribeRoute);
 
 // Admin
 app.use("/api/admin/users", adminRoutes);
->>>>>>> main
 app.use("/api/admin/products", productAdminRoutes);
 app.use("/api/admin/order", adminOrderRoutes);
 
