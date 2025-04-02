@@ -213,15 +213,15 @@ export const fetchCart = createAsyncThunk(
           state.loading = true;
           state.error = null;
         })
-        .addCase(removeFromCart.fulfilled, (state, action) => {
-          state.loading = false;
-          state.error = action.payload;
-          saveCartToStorage(action.payload);
-        })
-        .addCase(removeFromCart.rejected, (state, action) => {
-          state.loading = false;
-          state.error = action.payload?.message || "Failed to merge cart";
-        });
+        // .addCase(removeFromCart.fulfilled, (state, action) => {
+        //   state.loading = false;
+        //   state.error = action.payload;
+        //   saveCartToStorage(action.payload);
+        // })
+        // .addCase(removeFromCart.rejected, (state, action) => {
+        //   state.loading = false;
+        //   state.error = action.payload?.message || "Failed to merge cart";
+        // });
     },
   });
   

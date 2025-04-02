@@ -14,6 +14,7 @@ export const fetchProductsByFilters = createAsyncThunk("products/fetchByFilters"
         if (sortBy) query.append("sortBy", sortBy);
         if (search) query.append("search", search);
         if (category) query.append("category", category);
+        if (material) query.append("material", material);
         if (limit) query.append("limit", limit);
 
         const response = await axios.get(
@@ -29,7 +30,7 @@ export const fetchProductDetails = createAsyncThunk(
     "products/fetchProductDetails",
     async (id) => {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/products?${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`
       );
       return response.data;
     }
@@ -55,9 +56,9 @@ export const fetchProductDetails = createAsyncThunk(
   
   export const fetchSimilarProducts = createAsyncThunk(
     "products/fetchSimilarProducts",
-    async (id) => {
+    async ({id}) => {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/products/similar?${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${id}`
       );
       return response.data;
     }
@@ -78,7 +79,7 @@ export const fetchProductDetails = createAsyncThunk(
         maxPrice: "",
         sortBy: "",
         search: "",
-        category: "",
+        material: "",
         collection: "",
       },
     },
@@ -94,7 +95,7 @@ export const fetchProductDetails = createAsyncThunk(
           maxPrice: "",
           sortBy: "",
           search: "",
-          category: "",
+          material: "",
           collection: "",
         };
       },
@@ -156,7 +157,7 @@ export const fetchProductDetails = createAsyncThunk(
         })
         .addCase(fetchSimilarProducts.fulfilled, (state, action) => {
           state.loading = false;
-          state.products = action.payload;
+          state.similarProducts = action.payload;
         })
         .addCase(fetchSimilarProducts.rejected, (state, action) => {
           state.loading = false;
@@ -165,5 +166,5 @@ export const fetchProductDetails = createAsyncThunk(
     },
   });
 
-  export const { setFilters, clearFilters } = productsSliceactions;
+  export const { setFilters, clearFilters } = productSlice.actions;
   export default productSlice.reducer;

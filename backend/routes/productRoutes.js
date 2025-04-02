@@ -1,7 +1,6 @@
 const express = require("express");
 const Product = require("../models/Product");
 const {protect, admin} = require("../middleware/authMiddleware");
-const { route } = require("./productRoutes");
 
 const router = express.Router();
 
@@ -157,11 +156,11 @@ router.get("/", async (req, res) => {
 // @route GET /api/products/best-product
 // @desc Retrieve the product with heghest rating
 // @access public
-router.get("/best-product", async (req, res) =>{
+router.get("/best-seller", async (req, res) =>{
     try {
-        const bestProduct = await Product.find().sort({rating: -1});
-        if(bestProduct) {
-            res.json(bestProduct);
+        const bestSeller = await Product.find().sort({rating: -1});
+        if(bestSeller) {
+            res.json(bestSeller);
         } else {
             res.status(404).json({message: "No best product found"});
         }

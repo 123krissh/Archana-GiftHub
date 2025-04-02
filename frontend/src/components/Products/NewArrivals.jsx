@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const NewArrivals = () => {
     const scrollRef = useRef(null);
@@ -10,96 +11,112 @@ const NewArrivals = () => {
     const[canScrollLeft, setCanScrollLeft] = useState(false);
     const[canScrollRight, setCanScrollRight] = useState(true);
 
-    const newArrivals = [
-        {
-            _id: "1",
-            name: "Wood printed Photo",
-            price: 499,
-            images: [
-                {
-                    url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-                    altText: "Wood Pprinted Photo",
-                },
-            ],
-        },
-        {
-            _id: "2",
-            name: "Wood printed Photo",
-            price: 499,
-            images: [
-                {
-                    url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-                    altText: "Wood Pprinted Photo",
-                },
-            ],
-        },
-        {
-            _id: "3",
-            name: "Wood printed Photo",
-            price: 499,
-            images: [
-                {
-                    url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-                    altText: "Wood Pprinted Photo",
-                },
-            ],
-        },
-        {
-            _id: "4",
-            name: "Wood printed Photo",
-            price: 499,
-            images: [
-                {
-                    url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-                    altText: "Wood Pprinted Photo",
-                },
-            ],
-        },
-        {
-            _id: "5",
-            name: "Wood printed Photo",
-            price: 499,
-            images: [
-                {
-                    url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-                    altText: "Wood Pprinted Photo",
-                },
-            ],
-        },
-        {
-            _id: "6",
-            name: "Wood printed Photo",
-            price: 499,
-            images: [
-                {
-                    url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-                    altText: "Wood Pprinted Photo",
-                },
-            ],
-        },
-        {
-            _id: "7",
-            name: "Wood printed Photo",
-            price: 499,
-            images: [
-                {
-                    url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-                    altText: "Wood Pprinted Photo",
-                },
-            ],
-        },
-        {
-            _id: "8",
-            name: "Wood printed Photo",
-            price: 499,
-            images: [
-                {
-                    url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-                    altText: "Wood Pprinted Photo",
-                },
-            ],
-        },
-    ];
+    // const newArrivals = [
+    //     {
+    //         _id: "1",
+    //         name: "Wood printed Photo",
+    //         price: 499,
+    //         images: [
+    //             {
+    //                 url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+    //                 altText: "Wood Pprinted Photo",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: "2",
+    //         name: "Wood printed Photo",
+    //         price: 499,
+    //         images: [
+    //             {
+    //                 url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+    //                 altText: "Wood Pprinted Photo",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: "3",
+    //         name: "Wood printed Photo",
+    //         price: 499,
+    //         images: [
+    //             {
+    //                 url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+    //                 altText: "Wood Pprinted Photo",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: "4",
+    //         name: "Wood printed Photo",
+    //         price: 499,
+    //         images: [
+    //             {
+    //                 url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+    //                 altText: "Wood Pprinted Photo",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: "5",
+    //         name: "Wood printed Photo",
+    //         price: 499,
+    //         images: [
+    //             {
+    //                 url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+    //                 altText: "Wood Pprinted Photo",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: "6",
+    //         name: "Wood printed Photo",
+    //         price: 499,
+    //         images: [
+    //             {
+    //                 url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+    //                 altText: "Wood Pprinted Photo",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: "7",
+    //         name: "Wood printed Photo",
+    //         price: 499,
+    //         images: [
+    //             {
+    //                 url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+    //                 altText: "Wood Pprinted Photo",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: "8",
+    //         name: "Wood printed Photo",
+    //         price: 499,
+    //         images: [
+    //             {
+    //                 url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+    //                 altText: "Wood Pprinted Photo",
+    //             },
+    //         ],
+    //     },
+    // ];
+
+    const [newArrivals, setNewArrivals] = useState([]);
+
+    useEffect(() => {
+        const fetchNewArrivals = async() => {
+            try {
+                const response = await axios.get(
+                    `${import.meta.env.VITE_BACKEND_URL}/api/products/new-arrivals`
+                );
+                setNewArrivals(response.data);
+            } catch (error) {
+                console.error(error);     
+            }
+        };
+        fetchNewArrivals();
+    }, []);
 
     const handleMouseDown = (e) => {
         setIsDragging(true);
@@ -145,7 +162,7 @@ const NewArrivals = () => {
             updateScrollButtons();
             return () => container.removeEventListener("scroll", updateScrollButtons);
         }
-    }, []);
+    }, [newArrivals]);
 
 
 

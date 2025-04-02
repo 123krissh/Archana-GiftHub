@@ -1,61 +1,78 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 import ProductGrid from "./ProductGrid";
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductDetails, fetchSimilarProducts } from '../../redux/slices/productsSlice';
+import { addToCart } from '../../redux/slices/cartSlice';
 
-const selectedProduct = {
-    name: "gifts for love Wood Wall Photo Frame  (Multicolor, 1 Photo(s), A4)",
-    Price: 399,
-    OriginalPrice: 599,
-    Description: "This photo frame is Made of Premium Wood Fibre and Washable Frame (No Glass Required ) Colour - Multicolour, Frame Can be washable with Water Photo required: Multiple Images Required. Quality frame with your Photo. After placing the order send photos and other customised details to the contact details given in product images",
-    material: "Wood",
-    sizes: ["8+12", "12+16", "13+9"],
-    colors: ["red", "white", "black", "blue"],
-    images: [
-        {
-            url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg",
-            altText: "Product 1",
-        },
-        {
-            url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-            altText: "Product 2",
-        },
-    ],
-};
+// const selectedProduct = {
+//     name: "gifts for love Wood Wall Photo Frame  (Multicolor, 1 Photo(s), A4)",
+//     Price: 399,
+//     OriginalPrice: 599,
+//     Description: "This photo frame is Made of Premium Wood Fibre and Washable Frame (No Glass Required ) Colour - Multicolour, Frame Can be washable with Water Photo required: Multiple Images Required. Quality frame with your Photo. After placing the order send photos and other customised details to the contact details given in product images",
+//     material: "Wood",
+//     sizes: ["8+12", "12+16", "13+9"],
+//     colors: ["red", "white", "black", "blue"],
+//     images: [
+//         {
+//             url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg",
+//             altText: "Product 1",
+//         },
+//         {
+//             url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+//             altText: "Product 2",
+//         },
+//     ],
+// };
 
 
-const similarProducts = [
-    {
-        _id: 1,
-        name: "Product 1",
-        price: 149,
-        images: [{url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg"}],
-    },
-    {
-        _id: 2,
-        name: "Product 2",
-        price: 149,
-        images: [{url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg"}],
-    },
-    {
-        _id: 3,
-        name: "Product 3",
-        price: 99,
-        images: [{url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp"}],
-    },
-    {
-        _id: 4,
-        name: "Product 4",
-        price: 249,
-        images: [{url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp"}],
-    },
-]
+// const similarProducts = [
+//     {
+//         _id: 1,
+//         name: "Product 1",
+//         price: 149,
+//         images: [{url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg"}],
+//     },
+//     {
+//         _id: 2,
+//         name: "Product 2",
+//         price: 149,
+//         images: [{url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg"}],
+//     },
+//     {
+//         _id: 3,
+//         name: "Product 3",
+//         price: 99,
+//         images: [{url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp"}],
+//     },
+//     {
+//         _id: 4,
+//         name: "Product 4",
+//         price: 249,
+//         images: [{url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp"}],
+//     },
+// ]
 
-const ProductDetails = () => {
+const ProductDetails = ({productId}) => {
+    const {id} = useParams();
+    const dispatch = useDispatch();
+    const {selectedProduct, loading, error, similarProducts} = useSelector((state) => state.products);
+    const {user, guestId} = useSelector((state) => state.auth);
     const [mainImage, setMainImage] = useState("");
     const [selectedSize, setSelectedSize] = useState("");
-    const [selectedColor, setSelectedColor] = useState("");
+    // const [selectedColor, setSelectedColor] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+    const productFetchId = productId || id;
+
+    useEffect(() => {
+        if(productFetchId) {
+            dispatch(fetchProductDetails(productFetchId));
+            dispatch(fetchSimilarProducts({id: productFetchId}));
+        }
+    }, [dispatch, productFetchId]);
 
 
     useEffect(() => {
@@ -70,24 +87,42 @@ const ProductDetails = () => {
     };
 
     const handleAddToCart = () => {
-        if(!selectedSize || !selectedColor) {  
-            toast.error("Please select a size and color before adding to cart.", {
+        if(!selectedSize) {  
+            toast.error("Please select a size before adding to cart.", {
                 duration: 1000,
             });
             return;
         }
         setIsButtonDisabled(true);  
-        setTimeout(() => {
+       
+        dispatch(addToCart({
+            productId: productFetchId,
+            quantity,
+            size: selectedSize,
+            guestId,
+            userId: user?._id,
+        })).than(() => {
             toast.success("Product added to cart!", {
                 duration: 1000,
             });
+        })
+        .finally(() => {
             setIsButtonDisabled(false);
-        }, 500);
+        });
     };
+
+    if(loading) {
+        return <p>Loading...</p>;
+    }
+
+    if(error) {
+        return <p>Error: {error}</p>;
+    }
 
 
   return (
     <div className="p-6">
+        {selectedProduct && (
       <div className="max-w-6xl mx-auto bg-gray-100 p-8 rounded-lg">
         <div className="flex flex-col md:flex-row">
             {/* Left Thumbnails */}
@@ -116,14 +151,14 @@ const ProductDetails = () => {
             <p className="text-lg text-gray-600 mb-1 line-through">{selectedProduct.OriginalPrice && `${selectedProduct.OriginalPrice}`}</p>
             <p className="text-xl text-gray-500 mb-2">₹{selectedProduct.Price}</p>
             <p className=" text-gray-600 mb-4">{selectedProduct.Description}</p>
-            <div className="mb-4">
+            {/* <div className="mb-4">
                 <p className="text-gray-700">Color:</p>
                 <div className="flex gap-2 mt-2">
                     {selectedProduct.colors.map((color) => (
                         <button key={color} onClick={() => setSelectedColor(color)} className={`w-8 h-8 rounded-full border ${selectedColor === color ? "border-black border-4" : "border-gray-300"}`} style={{backgroundColor: color.toLocaleLowerCase(), filter: "brightness(0.5)",}}></button>
                     ))}
                 </div>
-            </div>
+            </div> */}
             <div className="mb-4">
             <p className="text-gray-700">Size:</p>
                 <div className="flex gap-2 mt-2">
@@ -159,9 +194,10 @@ const ProductDetails = () => {
         </div>
         <div className="mt-8">
             <h2 className="text-xl text-center font-medium mb-4">You May Also Like</h2>
-            <ProductGrid products={similarProducts}/>
+            <ProductGrid products={similarProducts} loading={loading} error={error}/>
         </div>
       </div>
+      )}
     </div>
   )
 }
