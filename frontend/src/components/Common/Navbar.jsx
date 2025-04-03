@@ -6,11 +6,15 @@ import { FiAlignRight, FiShoppingBag  } from "react-icons/fi"
 import SearchBar from './SearchBar'
 import CartDrawer from '../Layout/CartDrawer'
 import logo from "../../assets/Logo.png"
+import { useSelector } from 'react-redux';
 
 
 const Navbar = () => {
     const [drawerOpen, setDraweropen] = useState(false);
     const [navDrawerOpen, setNavDrawerOpen] = useState(false);
+    const {cart} = useSelector((state) => state.cart);
+
+    const cartItemCount = cart?.products?.reduce((total, product) => total + product.quantity, 0) || 0;
 
     const toggleNavDrawer = () => {
         setNavDrawerOpen(!navDrawerOpen);     
@@ -36,7 +40,7 @@ const Navbar = () => {
             <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Contact Us</Link>
         </div>
         {/*Right icons*/}
-        <div className="flex items-center space-x-4 px-10">
+        <div className="flex items-center space-x-3 px-4">
             <Link to="/admin" className="block bg-black px-1 rounded text-sm text-white ">Admin</Link>
             <Link to="/profile" className="hover:text-black flex items-center gap-1"> 
             <HiOutlineUser className="h-6 w-6 text-gray-700"/> 
@@ -45,9 +49,12 @@ const Navbar = () => {
             <Link to="#" className=" hover:text-black flex items-center gap-3">
             <button onClick={toggleCartDrawer} className="relative hover:text-black">
                 <FiShoppingBag  className="h-6 w-6 text-gray-700 cursor-pointer"/>
-                <span className="absolute -top-1 bg-red-700 text-white text-xs rounded-full px-2 py-0.5">
-                  4
-                </span>
+                {cartItemCount > 0 && (
+                    <span className="absolute -top-1 bg-red-700 text-white text-xs rounded-full px-2 py-0.5">
+                    {cartItemCount}
+                  </span>
+                )}
+                
             </button>
             {/* <span className="hidden md:flex">Cart</span>  */}
             </Link>
@@ -74,7 +81,7 @@ const Navbar = () => {
             <Link to="/" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">HOME</Link>
             <Link to="/about" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">ABOUT US</Link>
             <Link to="/collections/all" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">PRODUCTS</Link>
-            <Link to="#" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">CONTACT US</Link>
+            <Link to="/contact" onClick={toggleNavDrawer} className="block text-gray-600 hover:text-black">CONTACT US</Link>
         </nav>
     </div>
     </div>

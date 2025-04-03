@@ -1,10 +1,16 @@
 import {useState} from "react"
 import { IoMdSearch, IoMdClose } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { fetchProductsByFilters, setFilters } from "../../redux/slices/productsSlice";
+// import search  from "../../../../backend/routes/productRoutes";
 
 
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSearchToggle = () => {
         setIsOpen(!isOpen);
@@ -12,7 +18,9 @@ const SearchBar = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        console.log("Search Term:", searchTerm);
+        dispatch(setFilters({search: searchTerm}));
+        dispatch(fetchProductsByFilters({search: searchTerm}));
+        navigate(`/collections/all?search=${searchTerm}`);
         setIsOpen(false);
     }
 

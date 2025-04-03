@@ -1,9 +1,8 @@
-import { createSlice, createAsyncThunk, __DO_NOT_USE__ActionTypes } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act } from "react";
 
 // Fetch all orders (admin only)
-export const fetchAllOrders = createAsyncThunk("adminOrders/fetchAllOrders", async (__, {rejectWithValue}) => {
+export const fetchAllOrders = createAsyncThunk("adminOrders/fetchAllOrders", async (_, {rejectWithValue}) => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders`, {
             headers: {
@@ -63,7 +62,7 @@ const adminOrderSlice = createSlice({
         })
         .addCase(fetchAllOrders.fulfilled, (state, action) => {
             state.loading = false;
-            state.error = action.payload;
+            state.orders = action.payload;
             state.totalOrders = action.payload.length;
 
             // calculate total sales
@@ -96,8 +95,3 @@ const adminOrderSlice = createSlice({
 });
 
 export default adminOrderSlice.reducer;
-
-
-
-
-// DO_NOT_USE__ActionTypes

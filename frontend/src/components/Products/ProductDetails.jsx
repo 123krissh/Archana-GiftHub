@@ -101,7 +101,7 @@ const ProductDetails = ({productId}) => {
             size: selectedSize,
             guestId,
             userId: user?._id,
-        })).than(() => {
+        })).then(() => {
             toast.success("Product added to cart!", {
                 duration: 1000,
             });
@@ -121,7 +121,7 @@ const ProductDetails = ({productId}) => {
 
 
   return (
-    <div className="p-6">
+    <div className="p-3">
         {selectedProduct && (
       <div className="max-w-6xl mx-auto bg-gray-100 p-8 rounded-lg">
         <div className="flex flex-col md:flex-row">
@@ -148,9 +148,10 @@ const ProductDetails = ({productId}) => {
             {/* Right Side */}
             <div className="md:w-1/2 md:ml-10">
             <h1 className="text-2xl md:text-3xl font-semibold mb-2">{selectedProduct.name}</h1>
-            <p className="text-lg text-gray-600 mb-1 line-through">{selectedProduct.OriginalPrice && `${selectedProduct.OriginalPrice}`}</p>
-            <p className="text-xl text-gray-500 mb-2">₹{selectedProduct.Price}</p>
-            <p className=" text-gray-600 mb-4">{selectedProduct.Description}</p>
+            <p className=" text-gray-600 mb-4">{selectedProduct.description}</p>
+            {/* <p className="text-lg text-gray-600 mb-1 line-through">{selectedProduct.price && `${selectedProduct.price}`}</p> */}
+            <p className="text-xl text-gray-500 mb-2">₹{selectedProduct.price}</p>
+        
             {/* <div className="mb-4">
                 <p className="text-gray-700">Color:</p>
                 <div className="flex gap-2 mt-2">
@@ -161,7 +162,7 @@ const ProductDetails = ({productId}) => {
             </div> */}
             <div className="mb-4">
             <p className="text-gray-700">Size:</p>
-                <div className="flex gap-2 mt-2">
+                <div className="flex gap-1 mt-2">
                     {selectedProduct.sizes.map((size) => (
                         <button key={size} onClick={() => setSelectedSize(size)} className={`px-4 py-2 rounded border ${selectedSize === size ? "bg-black text-white" : ""}`}>{size}</button>
                     ))}

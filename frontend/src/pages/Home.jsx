@@ -102,11 +102,11 @@ const Home = () => {
 
       <div className="container mx-auto">
       <h2 className="text-3xl text-center font-bold mb-2 mt-4">Top Products</h2>
-      {bestSellerProduct ? (
+      {/* {bestSellerProduct ? (
         <ProductDetails productId={bestSellerProduct._id}/>
       ) : (
         <p className="text-center ">Loading best seller product...</p>
-      )}
+      )} */}
       
       <ProductGrid products={products} loading={loading} error={error} />
       </div>

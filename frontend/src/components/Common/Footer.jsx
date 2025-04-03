@@ -4,7 +4,7 @@ import { FaFacebookF, FaInstagram, FaWhatsapp, FaPhoneAlt   } from "react-icons/
 
 const Footer = () => {
   return <footer className=" py-10 bg-gray-900">
-    <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-5 lg:px-0">
+    <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-5 lg:px-4">
         <div className="ml-10">
             <h3 className="text-lg text-gray-200 mb-3">Newsletter</h3>
             <p className="text-gray-400 mb-3">Be the first to hear about new products, exclusive events, and online offers.</p>
@@ -73,7 +73,7 @@ const Footer = () => {
     </div>
     </div> 
     {/* Footer Bottom */}
-    <div className="container mx-auto mt-12 px-4 lg:px-0 border-t border-gray-200 pt-6">
+    <div className="container mx-auto mt-12 px-4 lg:px-0 border-t border-gray-400 pt-6">
         <p className="text-gray-400 text-sm tracking-tighter text-center">&copy; 2025 GIFT HUB. All rights reserved. </p>
     </div>
   </footer>

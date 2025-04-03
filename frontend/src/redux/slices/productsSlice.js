@@ -18,7 +18,7 @@ export const fetchProductsByFilters = createAsyncThunk("products/fetchByFilters"
         if (limit) query.append("limit", limit);
 
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/products?${query / toString()}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/products?${query.toString()}`
         );
         return response.data;
     }
@@ -32,16 +32,17 @@ export const fetchProductDetails = createAsyncThunk(
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`
       );
-      return response.data;
+      return response.data; 
     }
   );
   
+  // Async thunk to fetch similar products
   export const updateProduct = createAsyncThunk(
     "products/updateProduct",
-    async (id, productdata) => {
+    async ({id, productData}) => { 
       const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/products?${id}`,
-        productdata,
+        `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,
+        productData,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -64,7 +65,7 @@ export const fetchProductDetails = createAsyncThunk(
     }
   );
   
-  const productSlice = createSlice({
+  const productsSlice = createSlice({
     name: "products",
     initialState: {
       products: [],
@@ -136,13 +137,13 @@ export const fetchProductDetails = createAsyncThunk(
         })
         .addCase(updateProduct.fulfilled, (state, action) => {
           state.loading = false;
-          const updateProduct = action.payload;
+          const updatedProduct = action.payload;
           const index = state.products.findIndex(
-            (product) => product._id === updateProduct._id
+            (product) => product._id === updatedProduct._id
           );
-  
+   
           if (index !== -1) {
-            state.products[index] = updateProduct;
+            state.products[index] = updatedProduct;
           }
         })
         .addCase(updateProduct.rejected, (state, action) => {
@@ -166,5 +167,5 @@ export const fetchProductDetails = createAsyncThunk(
     },
   });
 
-  export const { setFilters, clearFilters } = productSlice.actions;
-  export default productSlice.reducer;
+  export const { setFilters, clearFilters } = productsSlice.actions;
+  export default productsSlice.reducer;

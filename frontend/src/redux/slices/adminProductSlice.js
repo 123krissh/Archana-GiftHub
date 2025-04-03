@@ -15,7 +15,7 @@ export const fetchAdminProducts = createAsyncThunk("adminProducts/fetchProducts"
 });
 
 // async function to create a new product
-export const createdProduct = createAsyncThunk("adminProducts/createProduct", async (productData) => {
+export const createProduct = createAsyncThunk("adminProducts/createProduct", async (productData) => {
     const response = await axios.post(`${API_URL}/api/admin/products`, productData, {
         headers: {
             Authorization: USER_TOKEN,
@@ -58,14 +58,14 @@ const adminProductSlice = createSlice({
         })
         .addCase(fetchAdminProducts.fulfilled, (state, action) => {
             state.loading = false;
-            state.error = action.payload;
+            state.products = action.payload;
         })
         .addCase(fetchAdminProducts.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
         })
         // create product
-        .addCase(createdProduct.fulfilled, (state, action) => {
+        .addCase(createProduct.fulfilled, (state, action) => {
             state.products.push(action.payload);
         })
         // Update product
