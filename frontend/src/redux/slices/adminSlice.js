@@ -52,7 +52,7 @@ export const updateUser = createAsyncThunk(
         },
       }
     );
-    return response.data;
+    return response.data.user;
   }
 );
 

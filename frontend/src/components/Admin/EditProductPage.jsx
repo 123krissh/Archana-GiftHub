@@ -1,6 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchProductDetails, updateProduct } from '../../redux/slices/productsSlice';
 
 const EditProductPage = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {id} = useParams();
+    const {selectedProduct, loading, error} = useSelector((state) => state.products);
+
     const [productData, setProductData] = useState({
         name: "",
         description: "",
@@ -11,15 +19,22 @@ const EditProductPage = () => {
         sizes: [],
         collections: "",
         material: "",
-        images: [
-           {
-              url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-           },
-           {
-              url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-           },
-        ], 
+        images: [], 
     });
+
+    const [uploading, setUploading] = useState(false);
+
+    useEffect(() => {
+        if(id) {
+            dispatch(fetchProductDetails(id));
+        }
+    }, [dispatch, id]);
+
+    useEffect(() => {
+        if(selectedProduct) {
+            setProductData(selectedProduct);
+        }
+    }, [selectedProduct]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,13 +43,35 @@ const EditProductPage = () => {
 
     const handleImageUpload = async(e) => {
         const file = e.target.files[0];
-        console.log(file);
+        const formData = new FormData();
+        formData.append("image", file);
+
+        try {
+            setUploading(true);
+            const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/upload`, formData, 
+                {
+                    headers: {"Content-Type": "multiPart/form-data"},
+                }
+            );
+            setProductData((prevData) => ({
+                ...prevData,
+                images: [...prevData.images, {url: data.imageUrl, altText: ""}],
+            }));
+            setUploading(false);
+        } catch (error) {
+            console.error(error);
+            setUploading(false);
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(productData);
+        dispatch(updateProduct({id, productData}));
+        navigate("/admin/products");
     };
+
+    if(loading) return <p>Loading ...</p>;
+    if(error) return <p>Error: {error}</p>;
 
   return (
     <div className="max-w-5xl mx-auto p-6 shadow-md rounded-md">
@@ -75,6 +112,7 @@ const EditProductPage = () => {
         <div className="mb-6">
             <label className="block font-semibold mb-2">Upload Image</label>
             <input type="file" onChange={handleImageUpload} className="w-full  border-gray-400 border rounded-md p-2"/>
+            {uploading && <p>Uploading image...</p>}
             <div className="flex gap-4 mt-4">
                 {productData.images.map((image, index) => (
                     <div key={index}>

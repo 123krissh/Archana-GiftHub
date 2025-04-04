@@ -1,35 +1,22 @@
-import React from 'react'
-
-const checkout = {
-    _id: "12323",
-    createdAt: new Date(),
-    checkoutItems: [
-        {
-            productId: "1",
-            name: "Photo Frame",
-            size: "12+18",
-            price: 299,
-            quantity: 1,
-            image: "https://picsum.photos/150?random=1",
-        },
-        {
-            productId: "2",
-            name: "Photo Frame",
-            size: "12+18",
-            price: 299,
-            quantity: 1,
-            image: "https://picsum.photos/150?random=2",
-        },
-    ],
-    shippingAddress: {
-        address: "123 abc",
-        city: "Bikaner",
-        state: "Rajasthan",
-        country: "India",
-    },
-}; 
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { clearCart } from '../redux/slices/cartSlice';
 
 const OrderConfirmationPage = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {checkout} = useSelector((state) => state.checkout);
+
+    // clear the cart when the order is confirmed
+    useEffect(() => {
+        if(checkout && checkout._id) {
+            dispatch(clearCart());
+            localStorage.removeItem("cart");
+        } else {
+            navigate("/my-orders");
+        }
+    }, [checkout, dispatch, navigate]);
 
     const calculateEstimatedDelivery = (createdAt) => {
         const orderDate = new Date(createdAt);
@@ -73,7 +60,7 @@ const OrderConfirmationPage = () => {
             {/* Payment Info */}
             <div>
                 <h4 className="text-lg font-semibold mb-2">Payment</h4>
-                <p className="text-gray-600">UPI & Cash On Delivery</p>
+                <p className="text-gray-600">Paypal/UPI or Cash On Delivery</p>
             </div>
             {/* dilvery info */}
             <div>

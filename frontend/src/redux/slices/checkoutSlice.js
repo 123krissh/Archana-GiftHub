@@ -38,12 +38,12 @@ import axios from "axios";
           state.error = null;
         })
         .addCase(createCheckout.fulfilled, (state, action) => {
-          state.loading = true;
+          state.loading = false;
           state.checkout = action.payload;
         })
         .addCase(createCheckout.rejected, (state, action) => {
           state.loading = false;
-          state.error = action.payload.message;
+          state.error = action.payload;
         });
     },
   });
