@@ -4,7 +4,6 @@ import {
   buildCreateSlice,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import { checkout } from "../../../../backend/routes/checkoutRoutes";
 
 //Async thunk to create a chechout session
 export const createCheckout = createAsyncThunk(
@@ -16,7 +15,7 @@ export const createCheckout = createAsyncThunk(
         checkoutdata,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
           },
         }
       );
