@@ -10,6 +10,7 @@ import ProductGrid from '../components/Products/ProductGrid'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductsByFilters } from '../redux/slices/productsSlice'
 import axios from 'axios'
+import Contact from '../components/Layout/Contact'
 
 // const placeholderProducts = [
 //   {
@@ -112,6 +113,7 @@ const Home = () => {
       </div>
 
       <About/>
+      <Contact/>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchProductDetails, updateProduct } from '../../redux/slices/productsSlice';
+import axios from 'axios';
 
 const EditProductPage = () => {
     const dispatch = useDispatch();
