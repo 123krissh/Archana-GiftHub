@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { createCheckout } from '../../redux/slices/checkoutSlice';
 import axios from 'axios';
+import PayPalButton from '../Cart/PayPalButton';
 
 const Checkout = () => {
     const navigate = useNavigate();
@@ -12,11 +13,11 @@ const Checkout = () => {
 
     const [checkoutId, setCheckoutId] = useState(null);
     const [shippingAddress, setShippingAddress] = useState({
-        firtName: "",
+        firstName: "",
         lastName: "",
         address: "",
         city: "",
-        pincode: "",
+        pinCode: "",
         state: "",
         country: "",
         phone: "",
@@ -31,6 +32,7 @@ const Checkout = () => {
 
     const handleCreateCheckout = async (e) => {
         e.preventDefault();
+        // console.log("handleCreateCheckout called 🚀");
         if(cart && cart.products.length > 0) {
             const res = await dispatch(
                 createCheckout({
@@ -40,6 +42,7 @@ const Checkout = () => {
                     totalPrice: cart.totalPrice,
                 })
             );
+            // console.log("Checkout response: ", res);
             if(res.payload && res.payload._id) {
                 // Set checkout ID if checkout was successful
                 setCheckoutId(res.payload._id); 
@@ -101,7 +104,7 @@ const Checkout = () => {
                 <div>
                     <label className="block text-gray-700">First Name</label>
                     <input type="text" value={shippingAddress.firstName} 
-                    onChange={(e) => setShippingAddress({...shippingAddress, firstname: e.target.value,})}
+                    onChange={(e) => setShippingAddress({...shippingAddress, firstName: e.target.value,})}
                     className="w-full p-2 rounded border" required/>
                 </div>
                 <div>
@@ -125,8 +128,8 @@ const Checkout = () => {
                 </div>
                 <div>
                     <label className="block text-gray-700">Pin Code</label>
-                    <input type="text" value={shippingAddress.pincode} 
-                    onChange={(e) => setShippingAddress({...shippingAddress, pincode: e.target.value,})}
+                    <input type="text" value={shippingAddress.pinCode} 
+                    onChange={(e) => setShippingAddress({...shippingAddress, pinCode: e.target.value,})}
                     className="w-full p-2 rounded border" required/>
                 </div>
             </div>
@@ -155,9 +158,9 @@ const Checkout = () => {
                 ) : (
                     <div>
                         <h3 className="text-lg mb-4">Pay Now</h3>
-                        {/* <PayPalButton amount={cart.totalPrice} onSuccess={handlePaymentSuccess} onError={(err) => alert("Payment failed. Try again.")}/> */}
+                        <PayPalButton amount={cart.totalPrice} onSuccess={handlePaymentSuccess} onError={(err) => alert("Payment failed. Try again.")}/>
                     </div>
-                ) }
+                ) } 
             </div>
         </form>
      </div>
