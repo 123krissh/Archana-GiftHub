@@ -48,6 +48,54 @@ const products = [
           numReviews: 15
         },
         {
+          name: "Personalized Wooden Photo Frame",
+          description: "Beautiful wooden photo frame with engraved name and special message. Perfect for birthdays and anniversaries.",
+          price: 399.99,
+          discountPrice: 249.99,
+          countInStock: 180,
+          sku: "PWF-003",
+          category: "Photo Frame",
+          sizes: ["10x12", "12x15", "15x18"],
+          collections: "Gift",
+          material: "Engraved Wood",
+          images: [
+            {
+              url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+              altText: "Engraved wooden photo frame",
+            },
+            {
+              url: "https://picsum.photos/500/500?random=40",
+              altText: "Customized wooden frame with personal engraving",
+            }
+          ],
+          rating: 4.7,
+          numReviews: 15
+        },
+        {
+          name: "Personalized Wooden Photo Frame",
+          description: "Beautiful wooden photo frame with engraved name and special message. Perfect for birthdays and anniversaries.",
+          price: 399.99,
+          discountPrice: 249.99,
+          countInStock: 180,
+          sku: "PWF-004",
+          category: "Photo Frame",
+          sizes: ["10x12", "12x15", "15x18"],
+          collections: "Gift",
+          material: "Engraved Wood",
+          images: [
+            {
+              url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
+              altText: "Engraved wooden photo frame",
+            },
+            {
+              url: "https://picsum.photos/500/500?random=40",
+              altText: "Customized wooden frame with personal engraving",
+            }
+          ],
+          rating: 4.7,
+          numReviews: 15
+        },
+        {
           name: "Customized Mug with Photo",
           description: "Personalized ceramic mug with your favorite photo and custom message. Ideal for gifting on special occasions.",
           price: 199.99,
@@ -122,7 +170,7 @@ const products = [
             discountPrice: 799.99,
             countInStock: 80,
             sku: "LED-FRAME-003",
-            category: "Customized Frame",
+            category: "Photo Frame",
             sizes: ["10x10", "12x15"],
             collections: "Gift",
             material: "Acrylic & LED",

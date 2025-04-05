@@ -72,8 +72,8 @@ const Home = () => {
     // fetch products for a specific collection
     dispatch(
       fetchProductsByFilters({
-        category: "Customized Frame",
-        limit: 8,
+        category: "Photo Frame",
+        limit: 10,
       })
     );
     // fetch best seller product
