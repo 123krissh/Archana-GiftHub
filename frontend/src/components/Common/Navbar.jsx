@@ -38,7 +38,7 @@ const Navbar = () => {
             <Link to="/" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Home</Link>
             <Link to="/about" className="text-gray-700 hover:text-black text-sm font-medium uppercase">About Us</Link>
             <Link to="/collections/all" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Products</Link>
-            <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Contact Us</Link>
+            <Link to="/contact" className="text-gray-700 hover:text-black text-sm font-medium uppercase">Contact Us</Link>
         </div>
         {/*Right icons*/}
         <div className="flex items-center space-x-3 px-4">
