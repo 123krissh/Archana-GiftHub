@@ -103,6 +103,11 @@ const EditProductPage = () => {
             <label className="block font-semibold mb-2">SKU</label>
             <input type="text" name="sku" value={productData.sku} onChange={handleChange} className="w-full  border-gray-400 border rounded-md p-2" />
         </div>
+        {/* Category */}
+        <div className="mb-6">
+            <label className="block font-semibold mb-2">Category</label>
+            <input type="text" name="sku" value={productData.category} onChange={handleChange} className="w-full  border-gray-400 border rounded-md p-2" />
+        </div>
         {/* Sizes */}
         <div className="mb-6">
             <label className="block font-semibold mb-2">Sizes (comma-separated)</label>

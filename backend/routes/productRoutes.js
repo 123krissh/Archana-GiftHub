@@ -14,6 +14,7 @@ router.post("/", protect, admin, async (req, res) => {
             name, description, price, discountPrice, countInStock, category, sizes, collections, material, images, isFeatured, isPublished, tags, dimensions, weight, sku,
             // Reference to the admin user who created it
             user: req.user._id,
+            sku: `SKU-${Date.now()}`,
         });
         const createdProduct = await product.save();
         res.status(201).json(createdProduct);

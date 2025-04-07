@@ -40,6 +40,7 @@ app.use("/api", subscribeRoute);
 // Admin
 app.use("/api/admin/users", adminRoutes);
 app.use("/api/admin/products", productAdminRoutes);
+app.use("/api/admin/add-product", productAdminRoutes);
 app.use("/api/admin/orders", adminOrderRoutes);
 
 app.listen(PORT, () => {

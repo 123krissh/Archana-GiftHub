@@ -175,6 +175,7 @@ const Checkout = () => {
                         <div>
                             <h3 className="text-md">{product.name}</h3>
                             <p className="text-gray-500">Size: {product.size}</p>
+                            <p className="text-gray-500">Qty: {product.quantity}</p>
                         </div>
                     </div>
                     <p className="lg:text-xl">₹{product.price?.toLocaleString()}</p>

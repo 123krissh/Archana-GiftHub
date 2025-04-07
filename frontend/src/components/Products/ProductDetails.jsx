@@ -6,54 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductDetails, fetchSimilarProducts } from '../../redux/slices/productsSlice';
 import { addToCart } from '../../redux/slices/cartSlice';
 
-// const selectedProduct = {
-//     name: "gifts for love Wood Wall Photo Frame  (Multicolor, 1 Photo(s), A4)",
-//     Price: 399,
-//     OriginalPrice: 599,
-//     Description: "This photo frame is Made of Premium Wood Fibre and Washable Frame (No Glass Required ) Colour - Multicolour, Frame Can be washable with Water Photo required: Multiple Images Required. Quality frame with your Photo. After placing the order send photos and other customised details to the contact details given in product images",
-//     material: "Wood",
-//     sizes: ["8+12", "12+16", "13+9"],
-//     colors: ["red", "white", "black", "blue"],
-//     images: [
-//         {
-//             url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg",
-//             altText: "Product 1",
-//         },
-//         {
-//             url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp",
-//             altText: "Product 2",
-//         },
-//     ],
-// };
-
-
-// const similarProducts = [
-//     {
-//         _id: 1,
-//         name: "Product 1",
-//         price: 149,
-//         images: [{url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg"}],
-//     },
-//     {
-//         _id: 2,
-//         name: "Product 2",
-//         price: 149,
-//         images: [{url: "https://images.meesho.com/images/products/462493757/ng1zq_512.jpg"}],
-//     },
-//     {
-//         _id: 3,
-//         name: "Product 3",
-//         price: 99,
-//         images: [{url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp"}],
-//     },
-//     {
-//         _id: 4,
-//         name: "Product 4",
-//         price: 249,
-//         images: [{url: "https://giftsbyrashi.com/wp-content/uploads/2023/05/Heart-Photo-Frame.webp"}],
-//     },
-// ]
-
 const ProductDetails = ({productId}) => {
     const {id} = useParams();
     const dispatch = useDispatch();
@@ -76,7 +28,7 @@ const ProductDetails = ({productId}) => {
 
 
     useEffect(() => {
-        if (selectedProduct?.images?.lenght > 0) {
+        if (selectedProduct?.images?.length > 0) {
             setMainImage(selectedProduct.images[0].url);
         }
     }, [selectedProduct]);
@@ -128,7 +80,7 @@ const ProductDetails = ({productId}) => {
             {/* Left Thumbnails */}
             <div className="hidden md:flex flex-col space-y-4 mr-6">
                 {selectedProduct.images.map((image, index) => (
-                    <img key={index} src={image.url} alt={image.altText || `Thumbnail ${index}`} 
+                    <img key={index} src={image.url || "https://www.ipsindirapuramncr.com/assets/Images/newimg/no-image.png"} alt={image.altText || `Thumbnail ${index}`} 
                     className= {`w-20 h-20 object-cover rounded-lg cursor-pointer border ${mainImage === image.url ? "border-black" : "border-gray-300"}`} 
                     onClick={() => setMainImage(image.url)} />
                 ))}
@@ -136,13 +88,13 @@ const ProductDetails = ({productId}) => {
             {/* Main Image */}
             <div className="md:w-1/2">
             <div className="mb=4">
-                <img src={mainImage} alt="Main Product" className="w-full h-auto md:h-[30rem] object-cover rounded-lg"/>
+                <img src={mainImage || "https://www.ipsindirapuramncr.com/assets/Images/newimg/no-image.png"} alt="Main Product" className="w-full h-auto md:h-[30rem] object-cover rounded-lg"/>
             </div>
             </div>
             {/* Mobile Thumbnail */}
             <div className="md:hidden flex overscroll-x-scroll space-x-4 mb-4 mt-4">
                 {selectedProduct.images.map((image, index) => (
-                    <img key={index} src={image.url} alt={image.altText || `Thumbnail ${index}`} className={`w-20 h-20 object-cover rounded-lg cursor-pointer border ${mainImage === image.url ? "border-black" : "border-gray-300"}`} onClick={() => setMainImage(image.url)} />
+                    <img key={index} src={image.url || "https://www.ipsindirapuramncr.com/assets/Images/newimg/no-image.png"} alt={image.altText || `Thumbnail ${index}`} className={`w-20 h-20 object-cover rounded-lg cursor-pointer border ${mainImage === image.url ? "border-black" : "border-gray-300"}`} onClick={() => setMainImage(image.url)} />
                 ))}
             </div>
             {/* Right Side */}

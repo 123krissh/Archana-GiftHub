@@ -39,21 +39,23 @@ const CartContent = ({cart, userId, guestId}) => {
                     </p>
                     <div className="flex items-center mt-2">
                         <button 
-                        onClick={() => handleAddToCart(
-                            product.productId,
-                            -1,
-                            product.quantity,
-                            product.size
-                        )}
+                        onClick={() =>handleAddToCart({
+                            productId: product.productId,
+                            delta: -1,
+                            quantity: product.quantity,
+                            size: product.size
+                          })
+                        }
                         className="border rounded px-2 py-1 font-medium">-</button>
                         <span className="mx-4">{product.quantity}</span>
                         <button
-                        onClick={() => handleAddToCart (
-                            product.productId,
-                            1,
-                            product.quantity,
-                            product.size
-                        )}
+                        onClick={() => handleAddToCart({
+                            productId: product.productId,
+                            delta: 1,
+                            quantity: product.quantity,
+                            size: product.size
+                          })
+                        }
                         className="border rounded px-2 py-1 font-medium">+</button>
                     </div>
                 </div>

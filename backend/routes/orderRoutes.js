@@ -10,6 +10,11 @@ const router = express.Router();
 router.get("/my-orders", protect, async (req, res) => {
     // Find orders for the authenticated user
     try {
+        if (!req.user || !req.user._id) {
+            console.error("❌ req.user is missing or invalid in /my-orders");
+            return res.status(401).json({ message: "Unauthorized: User not found" });
+        }
+        
         const orders = await Order.find({user: req.user._id}).sort({
             createdAt: -1,
         });
@@ -42,4 +47,4 @@ router.get("/:id", protect, async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = router;  

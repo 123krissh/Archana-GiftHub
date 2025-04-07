@@ -67,7 +67,7 @@ const FilterSidebar = () => {
         const newPrice = e.target.value;
         setPriceRange([0, newPrice]);
         const newFilters = {...filters, minPrice: 0, maxPrice: newPrice};
-        setFilters(filters);
+        setFilters(newFilters);
         updateURLParams(newFilters);;
     };
 

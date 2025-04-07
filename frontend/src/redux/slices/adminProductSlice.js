@@ -23,6 +23,26 @@ export const createProduct = createAsyncThunk("adminProducts/createProduct", asy
     });
     return response.data;
 });
+// export const createProduct = createAsyncThunk(
+//     "adminProducts/createProduct",
+//     async (formData, { rejectWithValue }) => {
+//       try {
+//         const config = {
+//           headers: {
+//             "Content-Type": "multipart/form-data",
+//             Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+//           },
+//         };
+  
+//         const response = await axios.post(`${API_URL}/api/admin/products/add-product`, formData, config);
+//         return response.data;
+//       } catch (error) {
+//         return rejectWithValue(
+//           error.response?.data?.message || error.message || "Something went wrong!"
+//         );
+//       }
+//     }
+//   );  
 
 // async thunk to update an existing product
 export const updateProduct = createAsyncThunk("adminProducts/updateProduct", async ({ id, productData }) => {
