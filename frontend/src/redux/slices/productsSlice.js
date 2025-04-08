@@ -35,6 +35,24 @@ export const fetchProductDetails = createAsyncThunk(
       return response.data; 
     }
   );
+// Create Product
+  // export const createProduct = createAsyncThunk(
+  //   "products/createProduct",
+  //   async (formData, { rejectWithValue }) => {
+  //     try {
+  //       const config = {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+  //         },
+  //       };
+  //       const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`, formData, config);
+  //       return data;
+  //     } catch (error) {
+  //       return rejectWithValue(error.response?.data?.message || "Something went wrong");
+  //     }
+  //   }
+  // );
   
   // Async thunk to fetch similar products
   export const updateProduct = createAsyncThunk(
@@ -54,7 +72,6 @@ export const fetchProductDetails = createAsyncThunk(
   );
   
   //Async thunk to fetch similar products
-  
   export const fetchSimilarProducts = createAsyncThunk(
     "products/fetchSimilarProducts",
     async ({id}) => {
@@ -130,6 +147,18 @@ export const fetchProductDetails = createAsyncThunk(
           state.loading = false;
           state.error = action.error.message;
         })
+        // //Handle Create product
+        // .addCase(createProduct.pending, (state) => {
+        //   state.loading = true;
+        // })
+        // .addCase(createProduct.fulfilled, (state, action) => {
+        //   state.loading = false;
+        //   state.products = action.payload;
+        // })
+        // .addCase(createProduct.rejected, (state, action) => {
+        //   state.loading = false;
+        //   state.error = action.payload;
+        // })
         //Handle updating product
         .addCase(updateProduct.pending, (state) => {
           state.loading = true;

@@ -3,7 +3,6 @@ import { IoMdSearch, IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchProductsByFilters, setFilters } from "../../redux/slices/productsSlice";
-// import search  from "../../../../backend/routes/productRoutes";
 
 
 const SearchBar = () => {

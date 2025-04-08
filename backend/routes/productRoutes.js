@@ -7,7 +7,7 @@ const router = express.Router();
 // @route POST /api/products
 // @desc Create a new Product
 // @access Private/Admin
-router.post("/", protect, admin, async (req, res) => {
+router.post("/add-product", protect, admin, async (req, res) => {
     try {
         const { name, description, price, discountPrice, countInStock, category, sizes, collections, material, images, isFeatured, isPublished, tags, dimensions, weight, sku,} = req.body;
         const product = new Product({
@@ -109,7 +109,7 @@ router.get("/", async (req, res) => {
         }
 
         if(size) {
-            query.size = { $in: size.split(",")};
+            query.sizes = { $in: size.split(",")};
         }
 
         if (minPrice || maxPrice) {

@@ -205,7 +205,7 @@ router.post("/merge", protect, async (req, res) => {
                 } catch (error) {
                     console.error("Error deleting guest cart:", error);
                 }
-                res.json.status(200).json(userCart);
+                res.status(200).json(userCart);
             } else {
                 // If the user has no existing cart, assign the huest cart tothe user
                 guestCart.user = req.user._id;

@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { protect } = require("../middleware/authMiddleware");
 const router = express.Router();
 
-// @route POST /api/user/register
+// @route POST /api/users/register
 // @desc Register a new user
 // @access Public
 router.post("/register", async (req, res) => {
@@ -43,7 +43,7 @@ router.post("/register", async (req, res) => {
     }
 });
 
-// @route POST /api/user/register
+// @route POST /api/users/login
 // @desc Register a new user
 // @access Public
 router.post("/login", async (req, res) => {

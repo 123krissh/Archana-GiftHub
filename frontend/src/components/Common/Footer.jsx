@@ -60,10 +60,10 @@ const Footer = () => {
             <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
             <FaFacebookF className="h-5 w-5" />
             </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
+            <a href="https://www.instagram.com/bmsarchana__?igsh=MWVwbHB0c2owMHF3eA==" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
             <FaInstagram className="h-6 w-6" />
             </a>
-            <a href="https://www.whatsapp.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
+            <a href="https://wa.me/8432085210" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
             <FaWhatsapp className="h-6 w-6" />
             </a>
         </div>

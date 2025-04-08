@@ -15,34 +15,35 @@ export const fetchAdminProducts = createAsyncThunk("adminProducts/fetchProducts"
 });
 
 // async function to create a new product
-export const createProduct = createAsyncThunk("adminProducts/createProduct", async (productData) => {
-    const response = await axios.post(`${API_URL}/api/admin/products`, productData, {
-        headers: {
-            Authorization: USER_TOKEN,
-        },
-    });
-    return response.data;
-});
-// export const createProduct = createAsyncThunk(
-//     "adminProducts/createProduct",
-//     async (formData, { rejectWithValue }) => {
-//       try {
-//         const config = {
-//           headers: {
-//             "Content-Type": "multipart/form-data",
-//             Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-//           },
-//         };
+// export const createProduct = createAsyncThunk("adminProducts/createProduct", async (productData) => {
+//     const response = await axios.post(`${API_URL}/api/admin/products`, productData, {
+//         headers: {
+//             Authorization: USER_TOKEN,
+//         },
+//     });
+//     return response.data;
+// });
+export const createProduct = createAsyncThunk(
+    "adminProducts/createProduct",
+    async (productData, { rejectWithValue }) => {
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+          },
+        };
   
-//         const response = await axios.post(`${API_URL}/api/admin/products/add-product`, formData, config);
-//         return response.data;
-//       } catch (error) {
-//         return rejectWithValue(
-//           error.response?.data?.message || error.message || "Something went wrong!"
-//         );
-//       }
-//     }
-//   );  
+        const response = await axios.post(`${API_URL}/api/products/add-product`, productData, config);
+        return response.data;
+      } catch (error) {
+        console.error("Upload Error:", error.response?.data || error.message);
+        return rejectWithValue(
+          error.response?.data?.message || error.message || "Something went wrong!"
+        );
+      }
+    }
+  );   
 
 // async thunk to update an existing product
 export const updateProduct = createAsyncThunk("adminProducts/updateProduct", async ({ id, productData }) => {

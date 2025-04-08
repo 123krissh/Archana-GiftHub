@@ -3,7 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import login from "../assets/login.png";
 import { loginUser } from '../redux/slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { mergeCart } from '../redux/slices/cartSlice';
+import { fetchCart, mergeCart } from '../redux/slices/cartSlice';
+// import { GoogleLogin } from '@react-oauth/google';
+// import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,6 +22,7 @@ const isCheckoutRedirect = redirect.includes("checkout");
 
 useEffect(() => {
   if(user) {
+    dispatch(fetchCart({userId: user._id, guestId})).then(() =>{
     if(cart?.products.length > 0 && guestId) {
       dispatch(mergeCart({guestId, user})).then(() => {
         navigate(isCheckoutRedirect ? "/checkout" : "/");
@@ -27,13 +30,35 @@ useEffect(() => {
     } else {
       navigate(isCheckoutRedirect ? "/checkout" : "/");
     }
+  });
   }
 }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch]);
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   dispatch(loginUser({ email, password }));
+  //   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }));
-  };
+    dispatch(loginUser({ email, password })).then((res) => {
+      if (res.meta.requestStatus === "fulfilled") {
+        dispatch(fetchCart({ userId: res.payload._id, guestId }));
+      }
+    });
+  };  
+
+  // const handleGoogleLogin = async (credentialResponse) => {
+  //   const { credential } = credentialResponse;
+  //   if (credential) {
+  //     try {
+  //       const res = await axios.post("/api/auth/google-login", { token: credential });
+  //       dispatch(loginUser({ googleData: res.data }));
+  //     } catch (err) {
+  //       console.error("Google Login Failed:", err);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="flex">
@@ -58,6 +83,21 @@ useEffect(() => {
         <p className="mt-6 text-center text-sm">Don't have an account?{" "}
           <Link to={`/register?redirect=${encodeURIComponent(redirect)}`} className="text-blue-500">Register</Link>
         </p>
+        
+        {/* <div className="my-6 flex items-center justify-center">
+            <div className="w-1/5 border-b"></div>
+            <div className="mx-2 text-gray-500 text-sm">or</div>
+            <div className="w-1/5 border-b"></div>
+          </div> */}
+
+          {/* Google Login Button */}
+          {/* <div className="flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() => console.log("Google Login Failed")}
+            />
+          </div> */}
+
       </form>
       </div>
       <div className="hidden md:block w-1/2 bg-gray-800">
