@@ -87,9 +87,9 @@ const handleSubmit = (e) => {
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
           className="w-full p-2 border rounded-2xl" placeholder='Enter your password' />
         </div>
-        <button type='submit' className="w-full bg-black text-white p-2 rounded-2xl font-semibold hover:bg-gray-800 transition">{loading ? "Loading..." : "Sign Up"}</button>
+        <button type='submit' className="w-full bg-black text-white p-2 rounded-2xl font-semibold hover:bg-gray-800 transition cursor-pointer">{loading ? "Loading..." : "Sign Up"}</button>
         <p className="mt-6 text-center text-sm">Already have an account?{" "}
-          <Link to={`/login?redirect=${encodeURIComponent(redirect)}`} className="text-blue-500">Login</Link>
+          <Link to={`/login?redirect=${encodeURIComponent(redirect)}`} className="text-blue-500 cursor-pointer">Login</Link>
         </p>
       </form>
       </div>

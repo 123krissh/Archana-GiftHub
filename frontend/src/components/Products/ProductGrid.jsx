@@ -13,7 +13,7 @@ const ProductGrid = ({ products, loading, error }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2">
        {products.map((product, index) => (
-        <Link key={index} to={`/product/${product._id}`} className="block">
+        <Link key={index} to={`/product/${product._id}`} className="block cursor-pointer">
             <div className="bg-white p-2 rounded">
                 <div className="w-full h-full mb-3">
                     <img src={product.images[0].url} 

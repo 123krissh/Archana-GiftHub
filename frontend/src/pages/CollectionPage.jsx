@@ -40,12 +40,12 @@ const CollectionPage = () => {
   return (
      <div className="flex flex-col lg:flex-row">
       {/* Mobile filter button */}
-      <button onClick={toggleSidebar} className="lg:hidden border p-1 flex justify-center items-center">
+      <button onClick={toggleSidebar} className="lg:hidden border p-1 flex justify-center items-center cursor-pointer">
         <FaFilter className="mr-2"/> Filters
       </button>
 
       {/* Filter Sidebar */}
-      <div ref={sidebarRef} className={`${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 z-50 left-0 w-70 lg:w-[60rem] bg-white overflow-y-auto transition-transform duration-300 lg:static lg:translate-x-0`}>
+      <div ref={sidebarRef} className={`${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 z-50 left-0 w-65 lg:w-[50rem] bg-white overflow-y-auto transition-transform duration-300 lg:static lg:translate-x-0`}>
         <FilterSidebar/>
       </div>
 
