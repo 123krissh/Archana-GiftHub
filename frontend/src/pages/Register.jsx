@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import login from "../assets/login.png";
+import { toast } from 'sonner';
 import { registerUser } from '../redux/slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { mergeCart } from '../redux/slices/cartSlice';
@@ -31,10 +32,36 @@ useEffect(() => {
   }
 }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(registerUser({ name, email, password }));
+const isStrongPassword = (password) => {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/;
+  return regex.test(password);
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const isStrongPassword = (password) => {
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
   };
+
+  if (!isStrongPassword(password)) {
+    toast.error("Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.");
+    return;
+  }
+
+  dispatch(registerUser({ name, email, password })).then((res) => {
+    if (res.meta.requestStatus === "fulfilled") {
+      toast.success("Registered successfully! 🎉");
+    } else {
+      const errorMessage = res.payload?.message || "Registration failed. Try again.";
+      if (errorMessage.toLowerCase().includes("user already exists") || errorMessage.toLowerCase().includes("email")) {
+        toast.error("Email is already in use. Try logging in.");
+      } else {
+        toast.error(errorMessage);
+      }
+    }
+  });
+};
 
   return (
     <div className="flex">
@@ -61,7 +88,7 @@ useEffect(() => {
           className="w-full p-2 border rounded-2xl" placeholder='Enter your password' />
         </div>
         <button type='submit' className="w-full bg-black text-white p-2 rounded-2xl font-semibold hover:bg-gray-800 transition">{loading ? "Loading..." : "Sign Up"}</button>
-        <p className="mt-6 text-center text-sm">Don't have an account?{" "}
+        <p className="mt-6 text-center text-sm">Already have an account?{" "}
           <Link to={`/login?redirect=${encodeURIComponent(redirect)}`} className="text-blue-500">Login</Link>
         </p>
       </form>

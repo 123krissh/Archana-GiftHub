@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import login from "../assets/login.png";
+import { toast } from 'sonner';
 import { loginUser } from '../redux/slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart, mergeCart } from '../redux/slices/cartSlice';
@@ -39,14 +40,32 @@ useEffect(() => {
   //   dispatch(loginUser({ email, password }));
   //   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   dispatch(loginUser({ email, password })).then((res) => {
+  //     if (res.meta.requestStatus === "fulfilled") {
+  //       dispatch(fetchCart({ userId: res.payload._id, guestId }));
+  //     }
+  //   });
+  // };  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginUser({ email, password })).then((res) => {
       if (res.meta.requestStatus === "fulfilled") {
+        toast.success("Logged in successfully! 🎉", {
+          duration: 1000,
+        });
+  
         dispatch(fetchCart({ userId: res.payload._id, guestId }));
+      } else {
+        toast.error("Login failed. Please check your credentials.", {
+          duration: 1000,
+        });
       }
     });
-  };  
+  };
+  
 
   // const handleGoogleLogin = async (credentialResponse) => {
   //   const { credential } = credentialResponse;
