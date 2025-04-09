@@ -62,7 +62,7 @@ const Navbar = () => {
             </button>
             {/* <span className="hidden md:flex">Cart</span>  */}
             </Link>
-            <div className="overflow-hidden">
+            <div className="overflow-hidden cursor-pointer">
             <SearchBar/>
             </div>
             <button onClick={toggleNavDrawer} className="md:hidden">

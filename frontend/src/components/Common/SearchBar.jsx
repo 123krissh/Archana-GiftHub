@@ -30,13 +30,13 @@ const SearchBar = () => {
                 <div className="relative w-1/2">
                 <input type="text" placeholder="Search Products" onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} className="bg-gray-100 px-4 pr-12 py-2 rounded-lg focu:outline-none w-full placeholder:text-gray-700"/>
                 <button type="submit" className="absolute right-2 top-1/3 tranform -translate-y-1/2 text-gray-600">
-                    <IoMdSearch className="h-6 w-6 mt-2 text-gray-700"/>
+                    <IoMdSearch className="h-6 w-6 mt-2 text-gray-700 cursor-pointer"/>
                 </button>
                 </div>
                 <button type="button"
                  onClick={handleSearchToggle}
                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800" >
-                <IoMdClose className="h-6 w-6" />
+                <IoMdClose className="h-6 w-6 cursor-pointer" />
                 </button>
             </form>
         ) : (
