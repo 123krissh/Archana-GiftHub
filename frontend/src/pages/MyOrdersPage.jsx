@@ -32,7 +32,8 @@ const MyOrdersPage = () => {
                     <th className="py-2 px-4 sm:py-3">Shipping Address</th>
                     <th className="py-2 px-4 sm:py-3">Items</th>
                     <th className="py-2 px-4 sm:py-3">Price</th>
-                    <th className="py-2 px-4 sm:py-3">Status</th>
+                    <th className="py-2 px-4 sm:py-3">Payment Status</th>
+                    <th className="py-2 px-4 sm:py-3">Order Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,14 +51,15 @@ const MyOrdersPage = () => {
                                 {new Date(order.createdAt).toLocaleDateString()}{" "}
                                 {new Date(order.createdAt).toLocaleTimeString()}
                             </td>
-                            <td className="py-2 px-2 sm:py-4 sm:px-2 text-xs">
-                                {order.shippingAddress ? `${order.shippingAddress.city}, ${order.shippingAddress.state}, ${order.shippingAddress.country}` : "N/A"}
+                            <td className="py-2 px-4 sm:py-4 sm:px-4 text-xs">
+                                {order.shippingAddress ? `${order.shippingAddress.address}, ${order.shippingAddress.city}, ${order.shippingAddress.state}, ${order.shippingAddress.country}` : "N/A"}
                             </td>
-                            <td className="py-2 px-2 sm:py-4 sm:px-4">{order.orderItems.length}</td>
+                            <td className="py-2 px-4 sm:py-4 sm:px-6">{order.orderItems.length}</td>
                             <td className="py-2 px-2 sm:py-4 sm:px-4">₹{order.totalPrice}</td>
-                            <td className="py-2 px-2 sm:py-4 sm:px-4">
+                            <td className="py-2 px-6 sm:py-4 sm:px-4">
                                 <span className={`${order.isPaid ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"} px-2 py-1 rounded-full text-xs sm:text-sm font-medium`}>{order.isPaid ? "Paid" : "Pending"}</span>
                             </td>
+                            <td className="py-2 px-2 sm:py-4 sm:px-4">{order.status}</td>
                         </tr>
                     ))
                 ) : (

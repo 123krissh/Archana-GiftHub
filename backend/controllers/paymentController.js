@@ -1,60 +1,54 @@
 import Razorpay from "razorpay";
-import crypto from "crypto";
-import Order from "../models/Order.js";
+import Checkout from "../models/Checkout.js";
 
-const instance = new Razorpay({
+// Initialize Razorpay with the keys from environment variables
+const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
-// Create Order
-export const createOrder = async (req, res) => {
+// Controller function to handle checkout creation and Razorpay order creation
+const createCheckout = async (req, res) => {
+  const { checkoutItems, shippingAddress, paymentMethod, totalPrice } = req.body;
+
   try {
-    const { amount } = req.body;
+    // Create a new checkout document
+    const checkout = new Checkout({
+      checkoutItems,
+      shippingAddress,
+      paymentMethod,
+      totalPrice,
+    });
 
-    const options = {
-      amount: amount,
-      currency: "INR",
-      receipt: `receipt_order_${Math.random() * 1000}`,
-    };
+    // Save the checkout document to the database
+    await checkout.save();
 
-    const order = await instance.orders.create(options);
+    // Create a Razorpay order based on the total price
+    const razorpayOrder = await razorpay.orders.create({
+      amount: totalPrice * 100, // Razorpay expects the amount in paisa (1 INR = 100 paisa)
+      currency: 'INR',
+      receipt: checkout._id.toString(),
+      notes: {
+        userId: req.user._id.toString(), // Optional: Store the user ID for reference
+      },
+    });
 
-    res.status(200).json({ success: true, order });
+    // Save the Razorpay order ID in the checkout document
+    checkout.razorpayOrderId = razorpayOrder.id;
+    await checkout.save();
+
+    // Respond with the checkout ID and Razorpay order ID
+    res.json({
+      _id: checkout._id,
+      razorpayOrderId: razorpayOrder.id, // Send Razorpay order ID to the frontend
+    });
   } catch (error) {
-    console.error("Error in createOrder", error);
-    res.status(500).json({ success: false, message: error.message });
+    // Handle any errors that occur during the checkout or Razorpay order creation
+    console.error(error);
+    res.status(500).json({ message: 'Error creating checkout order' });
   }
 };
 
-// Verify Payment
-export const verifyPayment = async (req, res) => {
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature, orderId } = req.body;
+// Export the controller functions
 
-  const body = razorpay_order_id + "|" + razorpay_payment_id;
-  const expectedSignature = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-                                  .update(body.toString())
-                                  .digest("hex");
-
-  if (expectedSignature === razorpay_signature) {
-    const order = await Order.findById(orderId);
-    if (!order) {
-      return res.status(404).json({ success: false, message: "Order not found" });
-    }
-
-    order.isPaid = true;
-    order.paidAt = Date.now();
-    order.paymentResult = {
-      id: razorpay_payment_id,
-      status: "captured",
-      update_time: new Date(),
-      email_address: order.userEmail, // Assuming you store customer email
-    };
-
-    await order.save();
-
-    res.status(200).json({ success: true, message: "Payment successful and order updated" });
-  } else {
-    res.status(400).json({ success: false, message: "Invalid signature" });
-  }
-};
+ export default createCheckout;

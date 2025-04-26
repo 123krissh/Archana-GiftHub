@@ -24,7 +24,7 @@ const Contact = () => {
           <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 bg-gray-100 p-8 rounded-lg shadow-lg">
             <div>
               <h2 className="text-2xl font-semibold mb-4">OUR INFORMATION</h2>
-              <p className="text-gray-600"><strong>Office Address:</strong>Nagour, Rajasthan, IND.</p>
+              <p className="text-gray-600"><strong>Office Address:</strong>Front of Bhargaw Complex, Station Rd, Bhandariyon Ki Gali, Nagaur, Rajasthan 341001</p>
               <p className="text-gray-600"><strong>Call Us:</strong> +91 8619604816</p>
               <p className="text-gray-600"><strong>Call Us:</strong> +91 8432085210</p>
               <p className="text-gray-600"><strong>General Enquiry:</strong> Archana.gifthub@gmail.com</p>

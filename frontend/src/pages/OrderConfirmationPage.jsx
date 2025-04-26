@@ -32,11 +32,11 @@ const OrderConfirmationPage = () => {
         <div className="flex justify-between mb-10">
             {/* order id & date */}
             <div>
-                <h2 className="text-xl font-semibold">Order ID: {checkout._id}</h2>
+                <h2 className="text font-semibold">Order ID: {checkout._id}</h2>
                 <p className="text-gray-500">Order date: {new Date(checkout.createdAt).toLocaleDateString()}</p>
             </div>
             <div>
-                <p className="text-emerald-700 text-sm">Estimated Deliver:{" "} {calculateEstimatedDelivery(checkout.createdAt)}</p>
+                <p className="text-emerald-700 text-sm px-4">Estimated Deliver:{" "} {calculateEstimatedDelivery(checkout.createdAt)}</p>
             </div>
         </div>
         {/* order items */}
@@ -60,7 +60,7 @@ const OrderConfirmationPage = () => {
             {/* Payment Info */}
             <div>
                 <h4 className="text-lg font-semibold mb-2">Payment</h4>
-                <p className="text-gray-600">Paypal/UPI or Cash On Delivery</p>
+                <p className="text-gray-600">Razorpay</p>
             </div>
             {/* dilvery info */}
             <div>
@@ -68,7 +68,8 @@ const OrderConfirmationPage = () => {
             <p className="text-gray-600">{checkout.shippingAddress.address}</p>
             <p className="text-gray-600">{checkout.shippingAddress.city},{" "}
                 {checkout.shippingAddress.state},{" "} 
-                {checkout.shippingAddress.country}
+                {checkout.shippingAddress.country},{" "} 
+                {checkout.shippingAddress.phone}
             </p>
             </div>
         </div>
