@@ -1,7 +1,8 @@
-const express = require("express");
-const User = require("../models/User");
-const jwt = require("jsonwebtoken");
-const { protect } = require("../middleware/authMiddleware");
+import express from "express";
+import User from "../models/User.js";
+import jwt from "jsonwebtoken";
+import { protect } from "../middleware/authMiddleware.js";
+
 const router = express.Router();
 
 // @route POST /api/users/register
@@ -90,4 +91,4 @@ router.get("/profile", protect, async (req, res) => {
     res.json(req.user);
 });
 
-module.exports = router;
+export default router;

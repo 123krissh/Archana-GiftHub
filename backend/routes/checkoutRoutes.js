@@ -1,9 +1,9 @@
-const express = require("express");
-const Checkout = require("../models/Checkout");
-const Cart = require("../models/Cart");
-const Product = require("../models/Product");
-const Order = require("../models/Order");
-const {protect} = require("../middleware/authMiddleware");
+import express from "express";
+import Checkout from "../models/Checkout.js";
+import Cart from "../models/Cart.js";
+import Product from "../models/Product.js";
+import Order from "../models/Order.js";
+import {protect} from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -113,4 +113,4 @@ router.post("/:id/finalize", protect, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

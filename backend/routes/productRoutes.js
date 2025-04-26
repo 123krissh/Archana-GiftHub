@@ -1,6 +1,6 @@
-const express = require("express");
-const Product = require("../models/Product");
-const {protect, admin} = require("../middleware/authMiddleware");
+import express from "express";
+import Product from "../models/Product.js";
+import {protect, admin} from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -228,4 +228,4 @@ router.get("/similar/:id", async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

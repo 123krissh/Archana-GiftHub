@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const orderItemSchema = new mongoose.Schema(
   {
@@ -37,6 +37,13 @@ const orderSchema = new mongoose.Schema(
     paymentMethod: {
       type: String,
       required: true,
+      default: "Razorpay",
+    },
+    paymentResult: {
+      id: { type: String },
+      status: { type: String },
+      update_time: { type: String },
+      email_address: { type: String },
     },
     totalPrice: {
       type: Number,
@@ -70,4 +77,5 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("order", orderSchema);
+const Order = mongoose.model("order", orderSchema);
+export default Order;
