@@ -16,7 +16,7 @@ const Hero = () => {
             </div>
         </div> */}
         <div className="absolute inset-10 flex items-center justify-end">
-          <h1 className="sm:text-3xl lg:text-7xl font-bold uppercase mb-12 lg:mb-40 lg:mr-10 sm:mb-22" style={{fontFamily: "Grechen Fuemen",}}>ARCHANA GIFT HUB</h1>
+          <h1 className="sm:text-3xl lg:text-7xl font-bold uppercase mb-12 lg:mb-40 lg:mr-10 sm:mb-22" style={{fontFamily: "Grechen Fuemen",}}>The GIFTHUB Shop</h1>
         </div>
     </section>
   )

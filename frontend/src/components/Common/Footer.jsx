@@ -63,13 +63,13 @@ const Footer = () => {
             <a href="https://www.instagram.com/bmsarchana__?igsh=MWVwbHB0c2owMHF3eA==" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
             <FaInstagram className="h-6 w-6" />
             </a>
-            <a href="https://wa.me/8432085210" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
+            <a href="https://wa.me/7976617473" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
             <FaWhatsapp className="h-6 w-6" />
             </a>
         </div>
         <p className="text-gray-200">Call Us</p>
-        <p className="text-gray-400"> <FaPhoneAlt className="inline-block mr-2 text-gray-400"/> +91 8619604816 </p>
-        <p className="text-gray-400"> <FaPhoneAlt className="inline-block mr-2 text-gray-400"/> +91 8432085210 </p>
+        <p className="text-gray-400"> <FaPhoneAlt className="inline-block mr-2 text-gray-400"/> +91 7976617473 </p>
+        <p className="text-gray-400"> <FaPhoneAlt className="inline-block mr-2 text-gray-400"/> +91 7976617473 </p>
     </div>
     </div> 
     {/* Footer Bottom */}
